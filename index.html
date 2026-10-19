@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Всё о кабачке</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Кабачок: как растёт, как вырастить, сколько соберёте и что приготовить.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: одна колонка как грядка — огромное имя, «лаборатория роста» на всю ширину, затем полосы-разделы; калькулятор лежит на тёмно-зелёной «кожуре» */
+:root {
+  --flesh: #EDF1DD;      /* мякоть — фон */
+  --paper: #F7F9EE;      /* поверхности */
+  --ink: #17301A;        /* текст */
+  --ink-soft: #4D6148;
+  --line: #C8D3B1;
+  --bloom: #E9A912;      /* цветок */
+  --bloom-ink: #3A2A00;
+  --zuc: #3B6A2D;        /* кожура */
+  --zuc-dark: #24461D;
+  --zuc-speck: #A4C180;
+  --stem: #7D8C4C;
+  --band-bg: #2D5626;
+  --band-fg: #EEF2DF;
+  --band-soft: #B9CCA0;
+  --band-line: #4B7341;
+  --ok: #2F7A2A;
+  --warn: #B07A00;
+  --bad: #A2452A;
+
+  --f-display: "Dela Gothic One", "Arial Black", Impact, sans-serif;
+  --f-body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+
+  --s-xs: 0.8125rem; --s-sm: 0.9375rem; --s-md: 1.0625rem; --s-lg: 1.375rem; --s-xl: 2rem; --s-2xl: clamp(2rem, 5vw, 3.25rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --flesh: #101A0F; --paper: #172416; --ink: #E3EBD1; --ink-soft: #A2B394; --line: #2B3B28;
+    --bloom: #F2BA35; --bloom-ink: #2A1E00;
+    --zuc: #4A7F39; --zuc-dark: #2E5525; --zuc-speck: #A9C487; --stem: #8E9C5A;
+    --band-bg: #1D3519; --band-fg: #E3EBD1; --band-soft: #A3B98A; --band-line: #35552F;
+    --ok: #7CC46E; --warn: #E2B34A; --bad: #E58A6E;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --flesh: #101A0F; --paper: #172416; --ink: #E3EBD1; --ink-soft: #A2B394; --line: #2B3B28;
+  --bloom: #F2BA35; --bloom-ink: #2A1E00;
+  --zuc: #4A7F39; --zuc-dark: #2E5525; --zuc-speck: #A9C487; --stem: #8E9C5A;
+  --band-bg: #1D3519; --band-fg: #E3EBD1; --band-soft: #A3B98A; --band-line: #35552F;
+  --ok: #7CC46E; --warn: #E2B34A; --bad: #E58A6E;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--flesh);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--s-md);
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h2 { font-family: var(--f-display); font-weight: 400; font-size: var(--s-2xl); line-height: 1.05; letter-spacing: -0.01em; }
+h3 { font-size: var(--s-lg); font-weight: 600; line-height: 1.25; }
+p { margin: 0; }
+a { color: inherit; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: var(--s-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft);
+}
+.lede { max-width: 60ch; color: var(--ink-soft); font-size: var(--s-lg); line-height: 1.45; }
+section { padding-block: clamp(56px, 9vw, 104px); }
+section + section { border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 14px; margin-bottom: clamp(28px, 4vw, 44px); max-width: 70ch; }
+:focus-visible { outline: 3px solid var(--bloom); outline-offset: 3px; border-radius: 4px; }
+
+/* ——— Шапка ——— */
+.top { padding-block: 20px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.top nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: var(--s-sm); }
+.top nav a { text-decoration: none; color: var(--ink-soft); }
+.top nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* ——— Герой ——— */
+.hero { padding-block: clamp(32px, 6vw, 64px) clamp(48px, 7vw, 80px); border-top: 0; }
+.hero h1 {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: clamp(52px, 13.5vw, 172px); line-height: 0.88; letter-spacing: -0.03em;
+  color: var(--zuc-dark);
+}
+.hero h1 .o { color: var(--bloom); }
+.hero-sub { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; margin-top: 22px; }
+.hero-sub .latin { font-family: var(--f-mono); font-size: var(--s-sm); color: var(--ink-soft); text-align: right; line-height: 1.6; }
+@media (max-width: 720px) {
+  .hero-sub { grid-template-columns: 1fr; }
+  .hero-sub .latin { text-align: left; }
+}
+
+.lab {
+  margin-top: clamp(32px, 5vw, 56px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: clamp(16px, 3vw, 28px);
+  display: grid; gap: 20px;
+}
+.lab-head { display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; align-items: baseline; }
+.lab-head h3 { font-size: var(--s-md); }
+.svg-box { overflow-x: auto; }
+#zuc { display: block; width: 100%; min-width: 0; height: auto; max-width: 100%; }
+.controls { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px 18px; align-items: center; }
+.controls label { font-weight: 600; font-size: var(--s-sm); }
+input[type="range"] { width: 100%; accent-color: var(--zuc); }
+.btn {
+  font: 600 var(--s-sm) var(--f-body);
+  background: var(--zuc); color: var(--band-fg); border: 0; border-radius: 999px;
+  padding: 10px 18px; cursor: pointer; white-space: nowrap;
+}
+.btn:hover { background: var(--zuc-dark); }
+.readout { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.readout div { display: grid; gap: 2px; min-width: 0; }
+.readout dt, .k { font-family: var(--f-mono); font-size: var(--s-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
+.readout dd { margin: 0; font-family: var(--f-display); font-size: var(--s-xl); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.verdict { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.chip {
+  font: 600 var(--s-xs) var(--f-mono); text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 5px 10px; border-radius: 999px; border: 1.5px solid currentColor; white-space: nowrap;
+}
+.chip.ok { color: var(--ok); } .chip.warn { color: var(--warn); } .chip.bad { color: var(--bad); } .chip.young { color: var(--ink-soft); }
+.verdict p { flex: 1 1 280px; min-width: 0; color: var(--ink-soft); }
+@media (max-width: 720px) {
+  .readout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .controls { grid-template-columns: 1fr; }
+  .btn { justify-self: start; }
+}
+
+/* ——— Паспорт ——— */
+.passport { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin: 0; }
+.passport div { display: grid; grid-template-columns: 13ch minmax(0, 1fr); gap: 16px; padding-block: 14px; border-bottom: 1px dashed var(--line); }
+.passport dt { font-family: var(--f-mono); font-size: var(--s-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); padding-top: 3px; }
+.passport dd { margin: 0; }
+.passport dd b { font-family: var(--f-display); font-weight: 400; font-size: var(--s-lg); }
+@media (max-width: 760px) { .passport { grid-template-columns: 1fr; } }
+
+/* ——— Шаги ——— */
+.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 32px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.steps li::before {
+  content: counter(s); font-family: var(--f-display); font-size: 2.6rem; line-height: 1; color: var(--bloom);
+}
+.steps .when { font-family: var(--f-mono); font-size: var(--s-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--zuc); }
+.steps p { color: var(--ink-soft); }
+@media (max-width: 860px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .steps { grid-template-columns: 1fr; } }
+
+/* ——— Калькулятор (полоса-кожура) ——— */
+.band {
+  background-color: var(--band-bg);
+  background-image:
+    radial-gradient(ellipse 3px 1.6px at 20% 30%, var(--band-line) 98%, transparent 100%),
+    radial-gradient(ellipse 2.4px 1.2px at 70% 60%, var(--band-line) 98%, transparent 100%),
+    radial-gradient(ellipse 2px 1px at 45% 85%, var(--band-line) 98%, transparent 100%);
+  background-size: 46px 30px, 38px 26px, 52px 34px;
+  color: var(--band-fg);
+}
+.band section { border-top: 0; }
+.band .eyebrow, .band .lede { color: var(--band-soft); }
+.calc { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px 56px; align-items: start; }
+.calc form { display: grid; gap: 26px; }
+.field { display: grid; gap: 10px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.field > label, .field legend { font-weight: 600; display: flex; justify-content: space-between; gap: 12px; width: 100%; padding: 0; }
+.field output { font-family: var(--f-mono); font-weight: 500; color: var(--bloom); font-variant-numeric: tabular-nums; }
+.band input[type="range"] { accent-color: var(--bloom); }
+.seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label {
+  display: grid; gap: 2px; padding: 10px 12px; border: 1.5px solid var(--band-line); border-radius: 10px; cursor: pointer;
+  font-size: var(--s-sm); min-width: 0;
+}
+.seg label span { font-family: var(--f-mono); font-size: var(--s-xs); color: var(--band-soft); }
+.seg input:checked + label { border-color: var(--bloom); background: color-mix(in srgb, var(--bloom) 14%, transparent); }
+.seg input:focus-visible + label { outline: 3px solid var(--bloom); outline-offset: 2px; }
+.hint { font-size: var(--s-xs); color: var(--band-soft); }
+
+.result { display: grid; gap: 22px; }
+.big { font-family: var(--f-display); font-size: clamp(3rem, 8vw, 5rem); line-height: 0.95; font-variant-numeric: tabular-nums; }
+.big small { font-size: 0.4em; font-family: var(--f-body); font-weight: 500; margin-left: 6px; }
+.bar { display: flex; height: 18px; border-radius: 999px; overflow: hidden; background: var(--band-line); }
+.bar i { display: block; height: 100%; transition: width .35s ease; }
+.bar .fresh { background: var(--band-fg); }
+.bar .rest { background: var(--bloom); }
+.legend { display: flex; gap: 8px 20px; flex-wrap: wrap; font-size: var(--s-sm); color: var(--band-soft); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; background: var(--c); vertical-align: 0; }
+.outs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.out { border: 1.5px solid var(--band-line); border-radius: 14px; padding: 16px; display: grid; gap: 4px; min-width: 0; }
+.out .k { color: var(--band-soft); }
+.out b { font-family: var(--f-display); font-weight: 400; font-size: var(--s-xl); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.out p { font-size: var(--s-sm); color: var(--band-soft); }
+@media (max-width: 820px) { .calc { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .outs { grid-template-columns: 1fr; } .seg { grid-template-columns: 1fr; } }
+
+/* ——— Рецепты ——— */
+.kitchen { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; }
+.jar {
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 6px; padding: 6px;
+}
+.jar-in { border: 1px solid var(--ink); border-radius: 3px; padding: 22px 20px; display: grid; gap: 16px; }
+.jar-top { display: flex; justify-content: space-between; gap: 10px; font-family: var(--f-mono); font-size: var(--s-xs); text-transform: uppercase; letter-spacing: 0.12em; flex-wrap: wrap; }
+.jar h3 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.9rem, 4vw, 2.5rem); line-height: 1; text-align: center; color: var(--zuc-dark); }
+.jar .rule { height: 0; border-top: 1px solid var(--ink); }
+.ingr { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: var(--s-sm); }
+.ingr li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dotted var(--line); padding-bottom: 4px; }
+.ingr li span:last-child { font-family: var(--f-mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.jar ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: var(--s-sm); }
+.jar-foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-family: var(--f-mono); font-size: var(--s-xs); text-transform: uppercase; letter-spacing: 0.08em; }
+.dishes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 28px; }
+.dish { display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 3px solid var(--zuc); min-width: 0; }
+.dish .meta { font-family: var(--f-mono); font-size: var(--s-xs); color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; }
+.dish p { color: var(--ink-soft); font-size: var(--s-sm); }
+.dish .tip { color: var(--ink); }
+@media (max-width: 860px) { .kitchen { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .dishes { grid-template-columns: 1fr; } }
+
+/* ——— Сорта ——— */
+.table-box { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: var(--s-sm); }
+th { text-align: left; font-family: var(--f-mono); font-size: var(--s-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); font-weight: 500; padding: 0 12px 10px 0; border-bottom: 1px solid var(--ink); }
+td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+td.name { font-weight: 600; white-space: nowrap; }
+.sw { display: inline-block; width: 30px; height: 12px; border-radius: 6px; vertical-align: -1px; margin-right: 10px; border: 1px solid var(--line); }
+.days { display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.track { position: relative; width: 160px; height: 8px; background: var(--line); border-radius: 4px; flex: none; }
+.track i { position: absolute; top: 0; bottom: 0; background: var(--zuc); border-radius: 4px; }
+.note { margin-top: 14px; font-size: var(--s-xs); color: var(--ink-soft); }
+
+/* ——— Подвал ——— */
+footer { padding-block: 48px 64px; border-top: 1px solid var(--line); }
+.foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; }
+.foot p { max-width: 58ch; color: var(--ink-soft); }
+.foot .date { font-family: var(--f-display); font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 0.9; color: var(--bloom); text-align: right; }
+@media (max-width: 640px) { .foot { grid-template-columns: 1fr; } .foot .date { text-align: left; } }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Дачная энциклопедия · том «К»</span>
+    <nav aria-label="Разделы">
+      <a href="#passport">Паспорт</a>
+      <a href="#grow">Как вырастить</a>
+      <a href="#calc">Урожай</a>
+      <a href="#kitchen">Кухня</a>
+      <a href="#sorts">Сорта</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Каба<span class="o">ч</span>ок</h1>
+    <div class="hero-sub">
+      <p class="lede">В понедельник он размером с огурец. В пятницу его уже можно жарить. Через две недели им можно подпирать дверь. Здесь всё о самом настойчивом овоще на грядке.</p>
+      <p class="latin">Cucurbita pepo<br>семейство тыквенные<br>однолетнее растение</p>
+    </div>
+
+    <div class="lab" aria-labelledby="lab-title">
+      <div class="lab-head">
+        <h3 id="lab-title">Как быстро растёт кабачок после цветения</h3>
+        <span class="eyebrow">Масштаб линейки — сантиметры</span>
+      </div>
+      <div class="svg-box">
+        <svg id="zuc" viewBox="0 0 640 230" role="img" aria-label="Рисунок кабачка в масштабе с линейкой"></svg>
+      </div>
+      <div class="controls">
+        <label for="day">Дней после цветения</label>
+        <input type="range" id="day" min="0" max="21" step="1" value="7">
+        <button class="btn" id="play" type="button">Прокрутить три недели</button>
+      </div>
+      <dl class="readout">
+        <div><dt>День</dt><dd id="r-day">7</dd></div>
+        <div><dt>Длина</dt><dd id="r-len">20 см</dd></div>
+        <div><dt>Толщина</dt><dd id="r-dia">4 см</dd></div>
+        <div><dt>Вес, примерно</dt><dd id="r-w">200 г</dd></div>
+      </dl>
+      <div class="verdict">
+        <span class="chip ok" id="r-chip">Пора срывать</span>
+        <p id="r-text">Длина 15–20 см, кожица тонкая, семян почти нет. Лучший возраст для любого блюда.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="passport">
+    <div class="sec-head">
+      <span class="eyebrow">Паспорт овоща</span>
+      <h2>Кто он такой</h2>
+      <p class="lede">Кабачок — это кустовая тыква, которую едят недозрелой. Ближайшие родственники: патиссон, цукини и обычная тыква. Все они один ботанический вид.</p>
+    </div>
+    <dl class="passport">
+      <div><dt>Вид</dt><dd><i>Cucurbita pepo</i>, тыква обыкновенная</dd></div>
+      <div><dt>Родина</dt><dd>Мексика и Центральная Америка</dd></div>
+      <div><dt>В Европе</dt><dd>С XVI века. Цукини вывели в Италии в XIX веке</dd></div>
+      <div><dt>Калорийность</dt><dd><b>24</b> ккал на 100 г</dd></div>
+      <div><dt>Вода</dt><dd>Около <b>93</b>% массы</dd></div>
+      <div><dt>До урожая</dt><dd><b>40–50</b> дней от всходов</dd></div>
+      <div><dt>С одного куста</dt><dd><b>4–10</b> кг за сезон</dd></div>
+      <div><dt>Цветки</dt><dd>Мужские и женские на одном кусте. Съедобны и те и другие</dd></div>
+    </dl>
+  </section>
+
+  <section id="grow">
+    <div class="sec-head">
+      <span class="eyebrow">Грядка, средняя полоса России</span>
+      <h2>Как вырастить</h2>
+      <p class="lede">Кабачок неприхотлив. Ему нужны тепло, место и вода. Остальное он сделает сам, причём в избытке.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="when">Конец апреля</span><h3>Рассада, если хочется пораньше</h3><p>Сейте в торфяные стаканчики за 25–30 дней до высадки. Корни не любят пересадку, поэтому сажайте прямо в стаканчике.</p></li>
+      <li><span class="when">Конец мая — начало июня</span><h3>Посев в грунт</h3><p>Когда почва прогрелась до +12…14 °C и заморозки позади. Глубина 3–5 см, по 2–3 семечка в лунку. Оставьте самый сильный росток.</p></li>
+      <li><span class="when">Схема 70 × 70 см</span><h3>Дайте кусту место</h3><p>Один куст на квадратный метр. В июне это кажется расточительством, в августе листья закроют всю дорожку.</p></li>
+      <li><span class="when">8–10 литров на куст</span><h3>Полив под корень</h3><p>Тёплой водой раз в неделю, во время плодоношения раз в 3–4 дня. Листья лучше не мочить: на них быстро появляется мучнистая роса.</p></li>
+      <li><span class="when">Июль</span><h3>Проследите за опылением</h3><p>Сначала раскрываются мужские цветки, потом женские, с крошечным кабачком под венчиком. В пасмурное лето перенесите пыльцу кисточкой сами.</p></li>
+      <li><span class="when">Каждые 2–3 дня</span><h3>Собирайте молодыми</h3><p>При длине 15–20 см. Чем чаще срываете, тем больше новых завязей даёт куст. Один забытый переросток тормозит весь куст.</p></li>
+    </ol>
+  </section>
+</div>
+
+<div class="band" id="calc">
+  <div class="wrap">
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Калькулятор урожая</span>
+        <h2>Куда девать кабачки</h2>
+        <p class="lede">Посчитайте заранее, сколько вырастет и сколько останется после того, как семья наестся. Сезон плодоношения взят за 8 недель, с июля до середины сентября.</p>
+      </div>
+      <div class="calc">
+        <form id="calc-form" autocomplete="off">
+          <div class="field">
+            <label for="plants">Кустов на грядке <output id="o-plants" for="plants">4</output></label>
+            <input type="range" id="plants" min="1" max="12" value="4">
+          </div>
+          <fieldset class="field">
+            <legend>Какое лето</legend>
+            <div class="seg">
+              <input type="radio" name="yield" id="y4" value="4"><label for="y4">Холодное<span>4 кг с куста</span></label>
+              <input type="radio" name="yield" id="y6" value="6" checked><label for="y6">Обычное<span>6 кг с куста</span></label>
+              <input type="radio" name="yield" id="y9" value="9"><label for="y9">Жаркое<span>9 кг с куста</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="eat">Семья съедает в неделю <output id="o-eat" for="eat">2 кг</output></label>
+            <input type="range" id="eat" min="0" max="6" step="0.5" value="2">
+            <span class="hint">2 кг — это примерно 7 средних кабачков: пара сковородок оладий и рагу.</span>
+          </div>
+        </form>
+
+        <div class="result" aria-live="polite">
+          <div>
+            <span class="k">Урожай за сезон</span>
+            <div class="big"><span id="o-total">24</span><small>кг</small></div>
+            <span class="hint" id="o-pieces">≈ 80 кабачков по 300 г</span>
+          </div>
+          <div>
+            <div class="bar" aria-hidden="true"><i class="fresh" id="b-fresh"></i><i class="rest" id="b-rest"></i></div>
+            <div class="legend" style="margin-top:10px">
+              <span style="--c: var(--band-fg)">Съедите свежими: <b id="o-fresh">16 кг</b></span>
+              <span style="--c: var(--bloom)">Останется: <b id="o-rest">8 кг</b></span>
+            </div>
+          </div>
+          <div class="outs">
+            <div class="out"><span class="k">Банок икры по 0,5 л</span><b id="o-jars">16</b><p>Если весь остаток пустить на икру по рецепту ниже.</p></div>
+            <div class="out"><span class="k">Или соседей</span><b id="o-neigh">3</b><p>Каждому пакет на 3 кг. Звонить в дверь необязательно.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="kitchen">
+    <div class="sec-head">
+      <span class="eyebrow">Кухня</span>
+      <h2>Что приготовить</h2>
+      <p class="lede">У кабачка мягкий вкус, и он легко берёт на себя чужой: чеснок, укроп, томат, сыр. Главное правило — убирать лишнюю воду.</p>
+    </div>
+    <div class="kitchen">
+      <article class="jar" aria-labelledby="ikra">
+        <div class="jar-in">
+          <div class="jar-top"><span>Заготовка на зиму</span><span>Выход ≈ 3 л</span></div>
+          <h3 id="ikra">Икра кабачковая</h3>
+          <div class="rule"></div>
+          <ul class="ingr">
+            <li><span>Кабачки</span><span>3 кг</span></li>
+            <li><span>Морковь</span><span>1 кг</span></li>
+            <li><span>Лук репчатый</span><span>500 г</span></li>
+            <li><span>Томатная паста</span><span>3 ст. л.</span></li>
+            <li><span>Масло растительное</span><span>100 мл</span></li>
+            <li><span>Соль</span><span>1,5 ч. л.</span></li>
+            <li><span>Сахар</span><span>1 ч. л.</span></li>
+            <li><span>Уксус 9%</span><span>1 ст. л.</span></li>
+          </ul>
+          <ol>
+            <li>Нарежьте кабачки кубиком и обжарьте партиями до золотистого цвета.</li>
+            <li>Отдельно обжарьте тёртую морковь и мелко нарезанный лук.</li>
+            <li>Сложите всё в казан и тушите под крышкой 40 минут.</li>
+            <li>Добавьте пасту, соль и сахар, тушите ещё 15 минут без крышки.</li>
+            <li>Пробейте блендером. Для зимы влейте уксус, прогрейте и разлейте по горячим стерильным банкам.</li>
+          </ol>
+          <div class="rule"></div>
+          <div class="jar-foot"><span>Время: 1 ч 30 мин</span><span>Хранить до 12 месяцев</span></div>
+        </div>
+      </article>
+
+      <div class="dishes">
+        <article class="dish">
+          <span class="meta">20 минут · 2 порции</span>
+          <h3>Оладьи с укропом</h3>
+          <p>2 средних кабачка, 2 яйца, 4–5 ст. л. муки, зубчик чеснока, пучок укропа, соль.</p>
+          <p class="tip">Натрите кабачки, посолите и через 10 минут отожмите руками. Без этого оладьи расплывутся.</p>
+        </article>
+        <article class="dish">
+          <span class="meta">15 минут · закуска</span>
+          <h3>Цветки в кляре</h3>
+          <p>8–10 мужских цветков, 150 г рикотты или мягкого творога, зелень. Кляр: мука и ледяная газированная вода.</p>
+          <p class="tip">Рвите цветки утром, пока они раскрыты. Жарьте 1–2 минуты в горячем масле.</p>
+        </article>
+        <article class="dish">
+          <span class="meta">5 минут · без огня</span>
+          <h3>Лапша из цукини</h3>
+          <p>2 молодых цукини, 3 ст. л. песто, горсть черри, тёртый пармезан.</p>
+          <p class="tip">Нарежьте спиральной тёркой или овощечисткой лентами. Солите прямо перед подачей.</p>
+        </article>
+        <article class="dish">
+          <span class="meta">40 минут · для переростка</span>
+          <h3>Запечённые лодочки</h3>
+          <p>Один большой кабачок, 400 г фарша, лук, помидор, 100 г сыра.</p>
+          <p class="tip">Разрежьте вдоль, выберите ложкой семена, наполните фаршем. 180 °C, 30–35 минут, сыр за 5 минут до конца.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sorts">
+    <div class="sec-head">
+      <span class="eyebrow">Сорта</span>
+      <h2>Какой посадить</h2>
+      <p class="lede">Белоплодные сорта старые и выносливые. Цукини компактнее, у них тёмная кожица и плоды растут дольше, не грубея.</p>
+    </div>
+    <div class="table-box">
+      <table>
+        <thead><tr><th>Сорт</th><th>Тип</th><th>Плод</th><th>От всходов до урожая, дней</th></tr></thead>
+        <tbody id="sort-rows"></tbody>
+      </table>
+    </div>
+    <p class="note">Сроки ориентировочные и зависят от погоды. Шкала от 30 до 70 дней.</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <p>В США 8 августа отмечают день, когда кабачки тайком оставляют на крыльце у соседей. На российских дачах этот праздник длится с июля по сентябрь.</p>
+    <span class="date">8.VIII</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var svg = document.getElementById("zuc");
+  var PX = 12, X0 = 44, CY = 92, RULER_Y = 192;
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(n);
+    return n;
+  }
+
+  // Модель роста: логистическая кривая длины, толщина растёт быстрее у переростка
+  function lengthAt(d) { return 2 + 44 / (1 + Math.exp(-(d - 8) / 2.6)); }
+  function diaAt(L) { return L * 0.2 + Math.max(0, L - 25) * 0.08; }
+  function weightAt(L, D) { return Math.PI * (D / 2) * (D / 2) * L * 0.81; }
+
+  // Постоянные слои
+  var defs = el("defs", {});
+  var clip = el("clipPath", { id: "zclip" }, defs);
+  var clipPath = el("path", {}, clip);
+
+  var ruler = el("g", {});
+  el("rect", { x: X0 + 15 * PX, y: RULER_Y - 12, width: 5 * PX, height: 34, rx: 3, fill: "var(--bloom)", opacity: "0.28" }, ruler);
+  el("line", { x1: X0, x2: X0 + 45 * PX, y1: RULER_Y, y2: RULER_Y, stroke: "var(--ink)", "stroke-width": 1.5 }, ruler);
+  for (var c = 0; c <= 45; c++) {
+    var h = c % 5 === 0 ? 10 : 5;
+    el("line", { x1: X0 + c * PX, x2: X0 + c * PX, y1: RULER_Y, y2: RULER_Y + h, stroke: "var(--ink)", "stroke-width": c % 10 === 0 ? 1.5 : 1 }, ruler);
+    if (c % 10 === 0) {
+      var t = el("text", { x: X0 + c * PX, y: RULER_Y + 26, "text-anchor": "middle", fill: "var(--ink-soft)", "font-size": 12, "font-family": "JetBrains Mono, monospace" }, ruler);
+      t.textContent = c === 0 ? "0 см" : c;
+    }
+  }
+  var ideal = el("text", { x: X0 + 17.5 * PX, y: RULER_Y - 18, "text-anchor": "middle", fill: "var(--ink-soft)", "font-size": 11, "font-family": "JetBrains Mono, monospace" }, ruler);
+  ideal.textContent = "идеал 15–20";
+
+  var stem = el("path", { fill: "var(--stem)" });
+  var body = el("path", { fill: "var(--zuc)" });
+  var tex = el("g", { "clip-path": "url(#zclip)" });
+  var stripes = el("g", { stroke: "var(--zuc-speck)", "stroke-width": 1.2, fill: "none", opacity: "0.45" }, tex);
+  var speckG = el("g", { fill: "var(--zuc-speck)", opacity: "0.7" }, tex);
+  var shade = el("path", { fill: "var(--zuc-dark)", opacity: "0.45" }, tex);
+  var gloss = el("ellipse", { fill: "#ffffff", opacity: "0.16" }, tex);
+  var flower = el("g", {});
+
+  // Крапинки: фиксированный «случайный» набор
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  var specks = [];
+  for (var i = 0; i < 170; i++) specks.push({ u: rnd(), v: rnd() * 2 - 1, s: 0.6 + rnd() * 1.1, a: rnd() * 20 - 10 });
+  var speckEls = specks.map(function () { return el("ellipse", {}, speckG); });
+  var stripeEls = [-0.62, -0.25, 0.15, 0.55].map(function () { return el("path", {}, stripes); });
+
+  var petals = [];
+  for (var p = 0; p < 5; p++) petals.push(el("ellipse", { fill: "var(--bloom)" }, flower));
+  var flowerCore = el("circle", { fill: "var(--warn)" }, flower);
+
+  function shapePath(x1, Lp, r) {
+    var rs = r * 0.72, x2 = x1 + Lp, e = Math.max(x1 + 2, x2 - r * 0.9);
+    return "M" + x1 + "," + (CY - rs) +
+      " C" + (x1 + Lp * 0.35) + "," + (CY - rs) + " " + (x1 + Lp * 0.55) + "," + (CY - r) + " " + e + "," + (CY - r) +
+      " C" + (x2 + r * 0.25) + "," + (CY - r) + " " + (x2 + r * 0.25) + "," + (CY + r) + " " + e + "," + (CY + r) +
+      " C" + (x1 + Lp * 0.55) + "," + (CY + r) + " " + (x1 + Lp * 0.35) + "," + (CY + rs) + " " + x1 + "," + (CY + rs) +
+      " C" + (x1 - rs * 0.6) + "," + (CY + rs) + " " + (x1 - rs * 0.6) + "," + (CY - rs) + " " + x1 + "," + (CY - rs) + " Z";
+  }
+
+  var STATES = [
+    { max: 12, cls: "young", chip: "Рано", text: "Завязь ещё набирает вес. Сорвать можно, но кабачка хватит на пару ломтиков." },
+    { max: 22, cls: "ok", chip: "Пора срывать", text: "Длина 15–20 см, кожица тонкая, семян почти нет. Лучший возраст для любого блюда." },
+    { max: 30, cls: "warn", chip: "Ещё годится", text: "Кожица грубеет, семена заметны. Срежьте кожуру и пустите на икру или оладьи." },
+    { max: 99, cls: "bad", chip: "Переросток", text: "Толстая кожура и твёрдые семена. Подойдёт для лодочек, на семена или соседям." }
+  ];
+
+  var R = {
+    day: document.getElementById("r-day"), len: document.getElementById("r-len"),
+    dia: document.getElementById("r-dia"), w: document.getElementById("r-w"),
+    chip: document.getElementById("r-chip"), text: document.getElementById("r-text")
+  };
+  var fmt = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 });
+
+  function draw(d) {
+    var L = lengthAt(d), D = diaAt(L), Lp = L * PX, r = Math.max(3, D * PX / 2);
+    var x1 = X0, path = shapePath(x1, Lp, r);
+    body.setAttribute("d", path);
+    clipPath.setAttribute("d", path);
+
+    var sh = Math.max(4, r * 0.38);
+    stem.setAttribute("d", "M" + (x1 + 2) + "," + (CY - sh) + " L" + (x1 - 22) + "," + (CY - sh * 0.7 - 2) +
+      " L" + (x1 - 24) + "," + (CY + sh * 0.7 + 2) + " L" + (x1 + 2) + "," + (CY + sh) + " Z");
+
+    shade.setAttribute("d", "M" + (x1 - 20) + "," + (CY + r * 0.35) + " L" + (x1 + Lp + 20) + "," + (CY + r * 0.35) +
+      " L" + (x1 + Lp + 20) + "," + (CY + r + 10) + " L" + (x1 - 20) + "," + (CY + r + 10) + " Z");
+    gloss.setAttribute("cx", x1 + Lp * 0.5); gloss.setAttribute("cy", CY - r * 0.5);
+    gloss.setAttribute("rx", Lp * 0.36); gloss.setAttribute("ry", Math.max(1, r * 0.16));
+
+    stripeEls.forEach(function (s, k) {
+      var v = [-0.62, -0.25, 0.15, 0.55][k];
+      s.setAttribute("d", "M" + (x1 - 10) + "," + (CY + v * r * 0.72) + " Q" + (x1 + Lp * 0.5) + "," + (CY + v * r * 1.02) + " " + (x1 + Lp + 10) + "," + (CY + v * r * 0.9));
+    });
+    var k = Math.sqrt(Math.max(0.35, r / 25));
+    speckEls.forEach(function (e, j) {
+      var s = specks[j];
+      e.setAttribute("cx", x1 + s.u * Lp);
+      e.setAttribute("cy", CY + s.v * r * 0.92);
+      e.setAttribute("rx", 2.2 * s.s * k);
+      e.setAttribute("ry", 0.9 * s.s * k);
+      e.setAttribute("transform", "rotate(" + s.a + " " + (x1 + s.u * Lp) + " " + (CY + s.v * r * 0.92) + ")");
+    });
+
+    // Цветок увядает к 16 см
+    var fo = Math.max(0, Math.min(1, (16 - L) / 8));
+    var fx = x1 + Lp + 4, fs = 8 + 22 * fo;
+    flower.setAttribute("opacity", fo.toFixed(2));
+    petals.forEach(function (pe, j) {
+      var ang = j * 72 - 90;
+      var rad = ang * Math.PI / 180;
+      pe.setAttribute("cx", fx + Math.cos(rad) * fs * 0.55);
+      pe.setAttribute("cy", CY + Math.sin(rad) * fs * 0.55);
+      pe.setAttribute("rx", fs * 0.55); pe.setAttribute("ry", fs * 0.3);
+      pe.setAttribute("transform", "rotate(" + ang + " " + (fx + Math.cos(rad) * fs * 0.55) + " " + (CY + Math.sin(rad) * fs * 0.55) + ")");
+    });
+    flowerCore.setAttribute("cx", fx); flowerCore.setAttribute("cy", CY); flowerCore.setAttribute("r", fs * 0.22);
+
+    var W = weightAt(L, D);
+    R.day.textContent = d;
+    R.len.textContent = Math.round(L) + " см";
+    R.dia.textContent = fmt.format(Math.round(D * 2) / 2) + " см";
+    R.w.textContent = W < 1000 ? (Math.round(W / 10) * 10) + " г" : fmt.format(Math.round(W / 100) / 10) + " кг";
+    var st = STATES.filter(function (x) { return L < x.max; })[0];
+    R.chip.className = "chip " + st.cls;
+    R.chip.textContent = st.chip;
+    R.text.textContent = st.text;
+  }
+
+  var slider = document.getElementById("day");
+  slider.addEventListener("input", function () { stop(); draw(+slider.value); });
+  draw(+slider.value);
+
+  var timer = null, playBtn = document.getElementById("play");
+  function stop() { if (timer) { clearInterval(timer); timer = null; playBtn.textContent = "Прокрутить три недели"; } }
+  playBtn.addEventListener("click", function () {
+    if (timer) { stop(); return; }
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { slider.value = 21; draw(21); return; }
+    var d = 0; slider.value = 0; draw(0);
+    playBtn.textContent = "Остановить";
+    timer = setInterval(function () {
+      d++; slider.value = d; draw(d);
+      if (d >= 21) stop();
+    }, 260);
+  });
+
+  // ——— Калькулятор ———
+  var f = document.getElementById("calc-form");
+  var $ = function (id) { return document.getElementById(id); };
+  function calc() {
+    var plants = +$("plants").value;
+    var y = +f.querySelector('input[name="yield"]:checked').value;
+    var eat = +$("eat").value;
+    var total = plants * y;
+    var fresh = Math.min(total, eat * 8);
+    var rest = total - fresh;
+    $("o-plants").textContent = plants;
+    $("o-eat").textContent = fmt.format(eat) + " кг";
+    $("o-total").textContent = fmt.format(total);
+    $("o-pieces").textContent = "≈ " + Math.round(total / 0.3) + " кабачков по 300 г";
+    $("o-fresh").textContent = fmt.format(fresh) + " кг";
+    $("o-rest").textContent = fmt.format(rest) + " кг";
+    $("b-fresh").style.width = (total ? fresh / total * 100 : 0) + "%";
+    $("b-rest").style.width = (total ? rest / total * 100 : 0) + "%";
+    $("o-jars").textContent = Math.round(rest * 2);
+    $("o-neigh").textContent = Math.ceil(rest / 3);
+  }
+  f.addEventListener("input", calc);
+  f.addEventListener("submit", function (e) { e.preventDefault(); });
+  calc();
+
+  // ——— Сорта ———
+  var SORTS = [
+    ["Грибовский 37", "белоплодный", "светло-зелёный, гладкий", "#D9E4BE", 46, 57],
+    ["Белоплодный", "белоплодный", "белый, цилиндрический", "#EEF0DC", 35, 45],
+    ["Аэронавт", "цукини", "тёмно-зелёный, с крапом", "#2F5326", 45, 50],
+    ["Искандер F1", "гибрид", "светло-зелёный, восковой", "#B9CF8E", 38, 45],
+    ["Желтоплодный", "цукини", "ярко-жёлтый", "#EDC132", 43, 50],
+    ["Патиссон Белый 13", "родственник", "тарелка с фестонами", "#F1EFD8", 50, 65]
+  ];
+  var MIN = 30, MAX = 70;
+  $("sort-rows").innerHTML = SORTS.map(function (s) {
+    var l = (s[4] - MIN) / (MAX - MIN) * 100, w = (s[5] - s[4]) / (MAX - MIN) * 100;
+    return "<tr><td class=\"name\">" + s[0] + "</td><td>" + s[1] + "</td>" +
+      "<td><span class=\"sw\" style=\"background:" + s[3] + "\"></span>" + s[2] + "</td>" +
+      "<td><span class=\"days\"><span class=\"track\"><i style=\"left:" + l + "%;width:" + w + "%\"></i></span>" + s[4] + "–" + s[5] + "</span></td></tr>";
+  }).join("");
+})();
+</script>
+
+</body>
+</html>
